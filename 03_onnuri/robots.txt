@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /privacy/
+Disallow: /terms/
+Sitemap: https://onnuri.8949ok.kr/sitemap.xml
