@@ -33,7 +33,7 @@
     {"@type":"Question","name":"급여마다 따로 신청해야 하나요?","acceptedAnswer":{"@type":"Answer","text":"주민등록 주소지 행정복지센터에서 기초생활보장 급여를 통합 신청할 수 있으며, 소득인정액에 따라 해당되는 급여가 각각 결정됩니다."}}
   ]}
   </script>
-  <link rel="stylesheet" href="/css/style.css?v=20260709.2">
+  <link rel="stylesheet" href="/css/style.css?v=20260709.3">
 </head>
 <body>
 <div class="ad-container top-ad" aria-label="광고">
@@ -43,16 +43,12 @@
 
 <header class="main-header">
   <div class="header-inner">
-    <div class="brand"><img src="/assets/favicon.png" alt="" width="50" height="50"><div><h1><a href="/">기초생활수급 자격확인</a></h1><p>2026년 기준 중위소득 반영</p></div></div>
+    <div class="brand"><img src="/assets/favicon.png" alt="" width="44" height="44"><div><h1><a href="/">기초생활수급 자격확인</a></h1><p>2026년 기준 중위소득 반영</p></div></div>
     <button class="btn-share" id="btn-share">공유하기</button>
   </div>
-  <div class="hero">
-    <div class="hero-copy">
-      <span class="eyebrow">2026년 기준 중위소득 6.51% 인상 반영</span>
-      <h2>우리 집도 해당될까?<br><strong>1분 만에 확인하세요</strong></h2>
-      <p>가구원 수와 소득인정액만 입력하면 생계·의료·주거·교육급여 수급 가능성과 계산 근거를 바로 보여드립니다.</p>
-      <a class="hero-cta" href="#checker">자격 확인하기</a>
-    </div>
+  <div class="head-title">
+    <h2>기초생활수급자 자격 무료 확인</h2>
+    <p>생계·의료·주거·교육급여 소득기준 비교 · 2026 기준 중위소득 6.51% 인상 반영</p>
   </div>
 </header>
 
@@ -69,17 +65,17 @@
   <section id="checker" class="app-card checker">
     <div class="section-head"><span class="step">01</span><div><h2>수급 자격 간편 확인</h2><p>공식 판정을 대신하지 않는 사전 점검 도구입니다. 소득인정액이 무엇인지 아래 02번 설명을 꼭 확인하세요.</p></div></div>
     <form id="check-form">
-      <label>가구원 수
-        <select id="household-size">
-          <option value="">선택하세요</option>
-          <option value="1">1인 가구</option>
-          <option value="2">2인 가구</option>
-          <option value="3">3인 가구</option>
-          <option value="4">4인 가구</option>
-          <option value="5">5인 가구</option>
-          <option value="6">6인 가구</option>
-        </select>
-      </label>
+      <div class="field-block">
+        <span class="field-title">가구원 수</span>
+        <div class="chip-group" id="household-chips" role="radiogroup" aria-label="가구원 수">
+          <button type="button" class="chip" data-size="1">1인</button>
+          <button type="button" class="chip" data-size="2">2인</button>
+          <button type="button" class="chip" data-size="3">3인</button>
+          <button type="button" class="chip" data-size="4">4인</button>
+          <button type="button" class="chip" data-size="5">5인</button>
+          <button type="button" class="chip" data-size="6">6인</button>
+        </div>
+      </div>
       <label>월 소득인정액 (원)
         <input type="text" inputmode="numeric" id="income" placeholder="예) 1500000 (모르면 대략적인 월소득)">
       </label>

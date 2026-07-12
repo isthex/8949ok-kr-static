@@ -9,12 +9,20 @@ const BENEFITS = [
 ];
 
 const fmt = n => new Intl.NumberFormat('ko-KR').format(Math.round(n));
+let selectedSize = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof initSidebar === 'function') initSidebar({ relatedTools: ['bokji-subsidy', 'healthpoint', 'eitc-grant'] });
   buildStdTable();
   document.getElementById('check-form').addEventListener('submit', checkEligibility);
   document.getElementById('btn-share').addEventListener('click', handleShare);
+  // 가구원 수 칩 선택
+  document.querySelectorAll('#household-chips .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      selectedSize = Number(chip.dataset.size);
+      document.querySelectorAll('#household-chips .chip').forEach(c => c.classList.toggle('active', c === chip));
+    });
+  });
   // 소득 입력 콤마 자동
   const income = document.getElementById('income');
   income.addEventListener('input', () => {
@@ -37,12 +45,12 @@ function buildStdTable() {
 function checkEligibility(e) {
   e.preventDefault();
   const result = document.getElementById('check-result');
-  const size = Number(document.getElementById('household-size').value);
+  const size = selectedSize;
   const income = Number(document.getElementById('income').value.replace(/[^0-9]/g, ''));
 
   if (!size || !document.getElementById('income').value.trim()) {
     result.className = 'check-result warn';
-    result.innerHTML = '<h3>가구원 수와 소득인정액을 입력해 주세요</h3><p>소득인정액을 모르면 대략적인 월소득을 입력해 보세요. 실제 심사는 재산까지 반영되므로 참고용입니다.</p>';
+    result.innerHTML = '<h3>가구원 수와 소득인정액을 입력해 주세요</h3><p>가구원 수 버튼을 먼저 선택하고, 소득인정액을 모르면 대략적인 월소득을 입력해 보세요.</p>';
     result.hidden = false;
     return;
   }
