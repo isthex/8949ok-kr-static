@@ -1,5 +1,2 @@
 /feed     /feed.xml   200
 /feed/    /feed.xml   200
-/01_healthpoint https://healthpoint.8949ok.kr/ 301
-/01_healthpoint/ https://healthpoint.8949ok.kr/ 301
-/01_healthpoint/* https://healthpoint.8949ok.kr/:splat 301
