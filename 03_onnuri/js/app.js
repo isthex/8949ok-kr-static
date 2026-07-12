@@ -1,7 +1,7 @@
-﻿const P = 'https://onnuri.gift/place';
+const P = 'https://onnuri.gift/place';
 const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 document.addEventListener('DOMContentLoaded', () => {
-  if (typeof initSidebar === 'function') initSidebar({ relatedTools: [] });
+  if (typeof initSidebar === 'function') initSidebar({ relatedSites: [{ name: '건강포인트 안내', url: 'https://healthpoint.8949ok.kr/' }, { name: '기초생활수급자 안내', url: 'https://gicho.8949ok.kr/' }], relatedTools: [] });
   const share = document.getElementById('btn-share');
   if (share) share.addEventListener('click', async () => { try { if (navigator.share) await navigator.share({ title: document.title, url: location.href }); else { await navigator.clipboard.writeText(location.href); share.textContent = '주소가 복사되었습니다'; setTimeout(() => { share.textContent = '공유하기'; }, 1600); } } catch (error) {} });
   const form = document.getElementById('finder-form');
