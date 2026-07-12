@@ -1,4 +1,17 @@
-const OFFICIAL_SEARCH="https://www.sbiz.or.kr/sijangtong/nation.do";
-function esc(v){return String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c]))}
-function applyQuery(){const q=new URLSearchParams(location.search);["region","voucher","place","keyword"].forEach(id=>{const el=document.getElementById(id);if(el&&q.get(id))el.value=q.get(id)});if(q.has("region")||q.has("voucher")||q.has("place")||q.has("keyword")){const form=document.getElementById("finder-form");if(form)form.dispatchEvent(new Event("submit",{cancelable:true}))}}
-document.addEventListener("DOMContentLoaded",()=>{const form=document.getElementById("finder-form"),result=document.getElementById("finder-result");if(form&&result){form.addEventListener("submit",e=>{e.preventDefault();const values={region:document.getElementById("region").value,voucher:document.getElementById("voucher").value,place:document.getElementById("place").value,keyword:document.getElementById("keyword").value.trim()};const params=new URLSearchParams(Object.entries(values).filter(([,v])=>v));history.replaceState(null,"",`?${params}`);const region=values.region||"전국",voucher=values.voucher||"상품권 형태 전체",place=values.place||"가맹점 전체",keyword=values.keyword;result.hidden=false;result.innerHTML=`<b>${esc(region)} · ${esc(voucher)} · ${esc(place)}</b><span>${keyword?`검색어 “${esc(keyword)}”를 포함해 `:""}공식 가맹점 결과에서 최신 등록 상태를 확인하세요.</span><br><a href="${OFFICIAL_SEARCH}" target="_blank" rel="noopener">전통시장 통통 공식 검색 열기 ↗</a><br><small>현재 조건을 공유하려면 주소를 복사하세요.</small>`;result.scrollIntoView({behavior:"smooth",block:"nearest"})})}applyQuery();const share=document.getElementById("share-btn");if(share)share.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(location.href);share.textContent="주소 복사됨";setTimeout(()=>share.textContent="공유하기",1800)}catch{share.textContent="주소를 복사하세요"}});if(typeof initSidebar==="function")initSidebar({relatedTools:["onnuri","healthpoint","gicho"],relatedSites:["onnuri","healthpoint","gicho"]})});
+﻿const P = 'https://onnuri.gift/place';
+const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof initSidebar === 'function') initSidebar({ relatedTools: [] });
+  const share = document.getElementById('btn-share');
+  if (share) share.addEventListener('click', async () => { try { if (navigator.share) await navigator.share({ title: document.title, url: location.href }); else { await navigator.clipboard.writeText(location.href); share.textContent = '주소가 복사되었습니다'; setTimeout(() => { share.textContent = '공유하기'; }, 1600); } } catch (error) {} });
+  const form = document.getElementById('finder-form');
+  const result = document.getElementById('finder-result');
+  if (!form || !result) return;
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(form); const type = data.get('type') || '상품권 형태 미선택'; const place = data.get('place') || '사용 장소 미선택'; const region = String(data.get('region') || '').trim();
+    const query = new URLSearchParams(); if (data.get('type')) query.set('type', data.get('type')); if (data.get('place')) query.set('place', data.get('place')); if (region) query.set('region', region); history.replaceState(null, '', query.toString() ? `?${query}` : location.pathname);
+    let guide = '/where/'; if (data.get('place') === 'online') guide = '/online/'; else if (data.get('type') === 'paper') guide = '/paper/'; else if (data.get('type') === 'digital') guide = '/digital/';
+    result.hidden = false; result.innerHTML = `<strong>${[region || '선택한 조건', type, place].map(esc).join(' · ')}</strong><p>공식 조회에서 최신 정보를 확인한 뒤 매장 또는 결제 화면에서 다시 확인하세요.</p><a href="${guide}">상황별 안내 보기</a> · <a href="${P}" target="_blank" rel="noopener">온누리플레이스 열기</a>`;
+  });
+});
