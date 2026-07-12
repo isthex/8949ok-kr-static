@@ -38,3 +38,10 @@
 .article-layout{margin-top:0;padding-top:24px}
 .breadcrumb{box-shadow:none}
 @media(max-width:800px){.article-header{padding:12px 14px 16px}.article-layout{margin-top:0;padding-top:18px}}
+/* 2026-07-12 mobile AdSense overflow containment */
+@media(max-width:800px){
+.ad-container{min-width:0;max-width:100%;overflow:hidden}
+.ad-container .adsbygoogle{width:100%!important;max-width:100%!important;overflow:hidden!important}
+.ad-container [id^="aswift_"][id$="_host"],.ad-container iframe[id^="aswift_"]{width:100%!important;max-width:100%!important}
+.article-layout main,.article-layout main>*{min-width:0;max-width:100%}
+}
