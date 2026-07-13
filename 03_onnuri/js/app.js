@@ -9,7 +9,7 @@ const fmt = n => new Intl.NumberFormat('ko-KR').format(Math.round(n));
 let sel = { rate: 7, limit: 1000000, label: '디지털 (카드·모바일)', tax: 15 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (typeof initSidebar === 'function') initSidebar({ relatedTools: ['gicho', 'bokji-subsidy', 'eitc-grant'] });
+  if (typeof initSidebar === 'function') initSidebar({ relatedTools: ['20_year-end-tax-preview', 'eitc-grant', '19_modoo-card-calculator', '40_oilcard-compare', '21_median-income-calculator', 'gicho'] });
   document.getElementById('calc-form').addEventListener('submit', calc);
   document.getElementById('btn-share').addEventListener('click', handleShare);
 
