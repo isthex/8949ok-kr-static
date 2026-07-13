@@ -12,7 +12,7 @@ const fmt = n => new Intl.NumberFormat('ko-KR').format(Math.round(n));
 let selectedSize = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (typeof initSidebar === 'function') initSidebar({ relatedTools: ['21_median-income-calculator', 'youth-benefits', '22_youth-rent-support', 'eitc-grant', '28_work-support-system', 'healthpoint'] });
+  if (typeof initSidebar === 'function') initSidebar({ relatedTools: ['21_median-income-calculator', 'youth-benefits', '22_youth-rent-support', 'eitc-grant'] });
   buildStdTable();
   document.getElementById('check-form').addEventListener('submit', checkEligibility);
   document.getElementById('btn-share').addEventListener('click', handleShare);
