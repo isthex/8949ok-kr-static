@@ -12,7 +12,7 @@ const fmt = n => new Intl.NumberFormat('ko-KR').format(Math.round(n));
 let selectedSize = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (typeof initSidebar === 'function') initSidebar({ relatedTools: ['bokji-subsidy', 'healthpoint', 'eitc-grant'] });
+  if (typeof initSidebar === 'function') initSidebar({ relatedTools: ['youth-benefits', 'bokji-subsidy', 'healthpoint'] });
   buildStdTable();
   document.getElementById('check-form').addEventListener('submit', checkEligibility);
   document.getElementById('btn-share').addEventListener('click', handleShare);
